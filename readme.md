@@ -1,25 +1,12 @@
-# Gaussian Splatting playground in Unity
+# Gaussian Splatting physic playground in Unity
 
-SIGGRAPH 2023 had a paper "[**3D Gaussian Splatting for Real-Time Radiance Field Rendering**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/)" by Kerbl, Kopanas, Leimkühler, Drettakis
-that is really cool! Check out their website, source code repository, data sets and so on. I've decided to try to implement the realtime visualization part (i.e. the one that takes already-produced
-gaussian splat "model" file) in Unity.
+This repository started as an experiment to better understand how physics works with Gaussian splatting in Unity, using [aras-p/UnityGaussianSpaltting](https://github.com/aras-p/UnityGaussianSplatting) as the base project.
+
+The goal is not to recreate that work from scratch, but to use it as a starting point to study behavior, integration, and testing possibilities inside a Unity scene using already generated Gaussian Splat models.
 
 ![Screenshot](/docs/Images/shotOverview.jpg?raw=true "Screenshot")
 
-Everything in this repository is based on that "OG" gaussian splatting paper. Towards end of 2023, there's a ton of
-[new gaussian splatting research](https://github.com/MrNeRF/awesome-3D-gaussian-splatting) coming out; _none_ of that is in this project.
-
-:warning: Status as of 2023 December: I'm not planning any significant further developments.
-
-:warning: The only platforms where this is known to work are the ones that use D3D12, Metal or Vulkan graphics APIs.
-PC (Windows on D3D12 or Vulkan), Mac (Metal), Linux (Vulkan) should work. Anything else I have not actually tested;
-it might work or it might not.
-- Some virtual reality devices work (reportedly HTC Vive, Varjo Aero, Quest 3 and Quest Pro). Some others might not
-  work, e.g. Apple Vision Pro. See [#17](https://github.com/aras-p/UnityGaussianSplatting/issues/17)
-- Anything using OpenGL or OpenGL ES: [#26](https://github.com/aras-p/UnityGaussianSplatting/issues/26)
-- WebGPU might work someday, but seems that today it does not quite have all the required graphics features yet: [#65](https://github.com/aras-p/UnityGaussianSplatting/issues/65)
-- Mobile may or might not work. Some iOS devices definitely do not work ([#72](https://github.com/aras-p/UnityGaussianSplatting/issues/72)),
-  some Androids do not work either ([#112](https://github.com/aras-p/UnityGaussianSplatting/issues/112))
+This repository therefore explicitly builds on aras-p’s work and uses it as a technical foundation for experiments and verification of rendering and scene behavior with Gaussian splatting.
 
 ## Usage
 
@@ -50,7 +37,6 @@ Since the gaussian splat models are quite large, I have not included any in this
 [paper github page](https://github.com/graphdeco-inria/gaussian-splatting) has a a link to
 [14GB zip](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/datasets/pretrained/models.zip) of their models.
 
-
 In the game object that has a `GaussianSplatRenderer` script, **point the Asset field to** one of your created assets.
 There are various controls on the script to debug/visualize the data, as well as a slider to move game camera into one of asset's camera
 locations.
@@ -65,40 +51,29 @@ Additional documentation:
 
 _That's it!_
 
+### Physics proxy setup
 
-## Write-ups
+For physics testing, I created mesh objects without Mesh Renderers and used them as simple physical bounding proxies to test ball collisions and bounces.
 
-My own blog posts about all this:
-* [Gaussian Splatting is pretty cool!](https://aras-p.info/blog/2023/09/05/Gaussian-Splatting-is-pretty-cool/) (2023 Sep 5)
-* [Making Gaussian Splats smaller](https://aras-p.info/blog/2023/09/13/Making-Gaussian-Splats-smaller/) (2023 Sep 13)
-* [Making Gaussian Splats more smaller](https://aras-p.info/blog/2023/09/27/Making-Gaussian-Splats-more-smaller/) (2023 Sep 27)
-* [Gaussian Explosion](https://aras-p.info/blog/2023/12/08/Gaussian-explosion/) (2023 Dec 8)
+This setup was made specifically for the `garden` scene from the dataset zip. Since the Gaussian assets are not included in this repository, recreating the asset locally may introduce alignment differences, transform offsets, scaling mismatches, or other discrepancies, so these proxy bounding boxes might require adjustment.
 
-## Performance numbers:
+The bounding boxes can be visualized by selecting the `PhysicsRoot_Proxy` object before entering Play mode, as shown in the screenshot.
 
-"bicycle" scene from the paper, with 6.1M splats and first camera in there, rendering at 1200x797 resolution,
-at "Medium" asset quality level (282MB asset file):
-
-* Windows (NVIDIA RTX 3080 Ti):
-  * Official SBIR viewer: 7.4ms (135FPS). 4.8GB VRAM usage.
-  * Unity, DX12 or Vulkan: 6.8ms (147FPS) - 4.5ms rendering, 1.1ms sorting, 0.8ms splat view calc. 1.3GB VRAM usage.
-* Mac (Apple M1 Max):
-  * Unity, Metal: 21.5ms (46FPS).
-
-Besides the gaussian splat asset that is loaded into GPU memory, currently this also needs about 48 bytes of GPU memory
-per splat (for sorting, caching view dependent data etc.).
+![Screenshot](/docs/Images/BBoxVisualized.png?raw=true "Screenshot")
 
 
 ## License and External Code Used
 
-The code I wrote for this is under MIT license. The project also uses several 3rd party libraries:
+This repository is based on the work of [aras-p / UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting), which is the main technical reference and starting point for this project.
 
-- [zanders3/json](https://github.com/zanders3/json), MIT license, (c) 2018 Alex Parker.
-- "DeviceRadixSort" GPU sorting code contributed by Thomas Smith ([#82](https://github.com/aras-p/UnityGaussianSplatting/pull/82)).
-- Virtual Reality fixes contributed by [@ninjamode](https://github.com/ninjamode) based on
-  [Unity-VR-Gaussian-Splatting](https://github.com/ninjamode/Unity-VR-Gaussian-Splatting).
+The original upstream project by aras-p is released under the MIT license, and this repository should be considered in that context together with any local modifications or additions introduced here.
 
-However, keep in mind that the [license of the original paper implementation](https://github.com/graphdeco-inria/gaussian-splatting/blob/main/LICENSE.md)
-says that the official _training_ software for the Gaussian Splats is for educational / academic / non-commercial
-purpose; commercial usage requires getting license from INRIA. That is: even if this viewer / integration
-into Unity is just "MIT license", you need to separately consider *how* did you get your Gaussian Splat PLY files.
+The project also inherits or reuses concepts, structure, and external components referenced by the original aras-p repository, including third-party code and integrations already documented upstream.
+
+In particular, when reviewing external code usage and license compatibility, the first reference to check is the upstream project itself:
+- [aras-p / UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting)
+
+It is also important to keep in mind that usage of Gaussian Splat assets can involve licensing conditions that are separate from this repository. In particular, the original Gaussian Splat training pipeline and related assets may be subject to the license terms of the official INRIA/GraphDeco implementation:
+- [graphdeco-inria / gaussian-splatting license](https://github.com/graphdeco-inria/gaussian-splatting/blob/main/LICENSE.md)
+
+So even if this repository or its Unity-side code is distributed under MIT-compatible terms, you should still verify the origin and license of the Gaussian Splat data, models, and any upstream components you use.
