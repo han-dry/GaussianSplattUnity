@@ -26,4 +26,15 @@
 /projects/**/obj/*
 *.sln.DotSettings.user
 
-scenes
+/scenes/*
+/projects/GaussianExample/*
+
+# Escludi i log e gli output temporanei di GraphViz (VFX Graph)
+**/GraphViz/
+
+# Escludi le impostazioni utente locali e le configurazioni della macchina
+**/ProjectSettings/ProjectVersion.txt
+**/ProjectSettings/PackageManagerSettings.asset
+
+# Opzionale ma consigliato: se hai scaricato pacchetti locali o estratti
+*.unitypackage
