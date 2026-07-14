@@ -64,11 +64,12 @@ The bounding boxes can be visualized by selecting the `PhysicsRoot_Proxy` object
 ### Physical Splat Behaviour
 
 I realized a PhysicManager to controll physical behaviour of the scene splats.
-In the video I implemented gusts of wind that move the leefs of the scene and show how the ball bounces on the objects
+In the Manager we can define all the aspects of the phenomenon we desire to implement. Then they can be used directly by the RenderGaussianSplats.shader where the logic is implemented.
+<img width="588" height="318" alt="image" src="https://github.com/user-attachments/assets/6d16f7b2-8a0e-47e7-a578-f7aee566e54c" />
 
+In the video I implemented gusts of wind that move the leefs of the scene and show how the ball bounces on the objects.
 
-https://github.com/user-attachments/assets/20fcf329-fb1a-4c6e-b710-f27987f14af0
-
+https://github.com/user-attachments/assets/5c3367da-8594-4459-8be9-a5c944d010a6
 
 ## License and External Code Used
 
