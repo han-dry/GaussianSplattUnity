@@ -61,6 +61,14 @@ The bounding boxes can be visualized by selecting the `PhysicsRoot_Proxy` object
 
 ![Screenshot](/docs/Images/BBoxVisualized.png?raw=true "Screenshot")
 
+### Physical Splat Behaviour
+
+I realized a PhysicManager to controll physical behaviour of the scene splats.
+In the video I implemented gusts of wind that move the leefs of the scene and show how the ball bounces on the objects
+
+
+https://github.com/user-attachments/assets/20fcf329-fb1a-4c6e-b710-f27987f14af0
+
 
 ## License and External Code Used
 
