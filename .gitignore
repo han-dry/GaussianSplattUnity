@@ -27,7 +27,6 @@
 *.sln.DotSettings.user
 
 /scenes/*
-/projects/GaussianExample/*
 
 # Escludi i log e gli output temporanei di GraphViz (VFX Graph)
 **/GraphViz/
