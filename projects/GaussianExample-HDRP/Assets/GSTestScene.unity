@@ -2493,12 +2493,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a82c9bbe5f87442aa6f91608149bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GaussianWindManager
-  targetRenderer: {fileID: 1609192434}
-  windShader: {fileID: 4800000, guid: 05625e124573fd74f88f03e4a944cf10, type: 3}
-  windSpeed: 1.5
-  windFrequency: 0.4
-  windIntensity: 0.2
-  windDirection: {x: 1, y: 0, z: 0.5}
+  vento:
+    enabled: 0
+    windSpeed: 5
+    windIntensity: 0.41
+    windDirection: {x: 1, y: 0.5, z: 0}
+    windBending: 0.385
+    windEdgeCutoff: 0.1
+    windTurbulence: 4
+  pioggia:
+    enabled: 0
+    intensity: 0.5
+    wetness: 0.8
 --- !u!1 &1630626413
 GameObject:
   m_ObjectHideFlags: 0
