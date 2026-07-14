@@ -37,3 +37,5 @@
 
 # Opzionale ma consigliato: se hai scaricato pacchetti locali o estratti
 *.unitypackage
+
+/projects/GaussianExample/Web_Build
