@@ -10,7 +10,7 @@ This repository therefore explicitly builds on aras-p’s work and uses it as a 
 
 ## Usage
 
-Download or clone this repository, open `projects/GaussianExample` as a Unity project (I use Unity 2022.3, other versions might also work),
+Download or clone this repository, open `projects/GaussianExample` as a Unity project (original work used Unity 2022.3, I'm working with unity 6.5 and it runs fine),
 and open `GSTestScene` scene in there.
 
 Note that the project requires DX12 or Vulkan on Windows, i.e. **DX11 will not work**. This is **not tested at all on mobile/web**, and probably
@@ -55,7 +55,7 @@ _That's it!_
 
 For physics testing, I created mesh objects without Mesh Renderers and used them as simple physical bounding proxies to test ball collisions and bounces.
 
-This setup was made specifically for the `garden` scene from the dataset zip. Since the Gaussian assets are not included in this repository, recreating the asset locally may introduce alignment differences, transform offsets, scaling mismatches, or other discrepancies, so these proxy bounding boxes might require adjustment.
+This setup was made specifically for the `7000_garden` scene from the dataset zip. Since the Gaussian assets are not included in this repository, recreating the asset locally may introduce alignment differences, transform offsets, scaling mismatches, or other discrepancies, so these proxy bounding boxes might require adjustment (after creation of the scene I apllied a -151 X-rotation to the 'GaussianSplats' object.
 
 The bounding boxes can be visualized by selecting the `PhysicsRoot_Proxy` object before entering Play mode, as shown in the screenshot.
 
