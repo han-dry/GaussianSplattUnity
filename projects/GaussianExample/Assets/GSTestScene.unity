@@ -1338,13 +1338,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462254335}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.21597674, y: -0.24894688, z: 0.14142314, w: -0.93347687}
+  m_LocalRotation: {x: -0.112204656, y: -0.23055163, z: 0.017285246, w: -0.9664147}
   m_LocalPosition: {x: -5.139, y: -0.077, z: -6.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 28.27, y: 27.281, z: -10.235}
+  m_LocalEulerAnglesHint: {x: 12.994, y: 26.959, z: 1.078}
 --- !u!114 &1462254339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,11 +1472,11 @@ MonoBehaviour:
   wind:
     enabled: 1
     windSpeed: 7
-    windIntensity: 0.402
-    windDirection: {x: 1, y: 0, z: 0.5}
-    windBending: 0.697
+    windIntensity: 0.5
+    windDirection: {x: 1, y: 0.5, z: 0.5}
+    windBending: 0.7
     windEdgeCutoff: 0.1
-    windTurbulence: 4
+    windTurbulence: 3
   rain:
     enabled: 0
     intensity: 0.5
