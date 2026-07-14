@@ -107,7 +107,7 @@ public class BallLauncher : MonoBehaviour
         Vector3 spawnPosition = playerCamera.transform.position + playerCamera.transform.forward * spawnDistance;
         Vector3 shotDirection = (targetPoint - spawnPosition).normalized;
 
-        ball.velocity = Vector3.zero;
+        ball.linearVelocity = Vector3.zero;
         ball.angularVelocity = Vector3.zero;
         ball.isKinematic = true;
         ball.position = spawnPosition;
