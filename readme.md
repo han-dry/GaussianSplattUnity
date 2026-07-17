@@ -63,7 +63,8 @@ The bounding boxes can be visualized by selecting the `PhysicsRoot_Proxy` object
 
 ### Physical Splat Behaviour
 
-I realized a PhysicManager to controll physical behaviour of the scene splats. Try the Demo "GS_build" in the Releases section.
+I realized a PhysicManager to controll physical behaviour of the scene splats. Try the Demo [GS_build.zip](https://github.com/han-dry/GaussianSplattUnity/releases/download/v1.0.0/GS_build.zip).
+
 In the Manager we can define all the aspects of the phenomenon we desire to implement. Then they can be used directly by the RenderGaussianSplats.shader where the logic is implemented.
 <img width="588" height="318" alt="image" src="https://github.com/user-attachments/assets/6d16f7b2-8a0e-47e7-a578-f7aee566e54c" />
 
