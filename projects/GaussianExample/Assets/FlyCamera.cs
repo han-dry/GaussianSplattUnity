@@ -30,17 +30,6 @@ public class FlyCamera : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
 
         rotationX += Input.GetAxis("Mouse X") * lookSensitivity;
         rotationY -= Input.GetAxis("Mouse Y") * lookSensitivity;

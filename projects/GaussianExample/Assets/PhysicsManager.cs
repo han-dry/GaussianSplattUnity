@@ -78,28 +78,41 @@ using UnityEngine;
 [System.Serializable]
 public class WindModule
 {
+
     [Header("Wind Activation")]
+    [ExposeToUI("Wind Enabled")]
+    [Tooltip("Enable or disable the wind effect on the splats.")]
     public bool enabled = true;
 
     [Header("Wind Primary Parameters")]
+    [Tooltip("Speed of the wind affecting the splats.")]
+    [ExposeToUI("Wind Speed", 0f, 10f)]
     [Range(0f, 10f)]
     public float windSpeed = 5f;
 
+    [Tooltip("Intensity of the wind affecting the splats.")]
+    [ExposeToUI("Wind Intensity", 0f, 1f)]
     [Range(0f, 1f)]
     public float windIntensity = 0.1f;
+
+    [Tooltip("Direction of the wind affecting the splats.")]
+    [ExposeToUI("Wind Direction")]
     public Vector3 windDirection = new Vector3(1.0f, 0.0f, 0.5f);
 
     [Header("Advanced Wind Settings")]
     [Tooltip("Intensity of the rotation/bending of the splat.")]
     [Range(0f, 2f)]
+    [ExposeToUI("Wind Bending", 0f, 2f)]
     public float windBending = 0.5f;
 
     [Tooltip("Green threshold: higher values limit the movement to only the purest leaves.")]
     [Range(0f, 0.5f)]
+    [ExposeToUI("Wind Edge Cutoff", 0f, 0.5f)]
     public float windEdgeCutoff = 0.1f;
 
     [Tooltip("Frequency of the wind gusts (creates more jagged and realistic movements).")]
     [Range(0f, 10f)]
+    [ExposeToUI("Wind Turbulence", 0f, 10f)]
     public float windTurbulence = 4.0f;
 
     public void UpdateShader(Matrix4x4 worldToCameraMatrix)
@@ -152,29 +165,25 @@ public class RainModule
 public class PhysicsManager : MonoBehaviour
 {
     [Header("Ambient Effects")]
-    public WindModule wind;
-    public RainModule rain;
+    [Tooltip("Configuration and shader updates for wind simulation.")]
+    public WindModule wind = new WindModule(); // Initialized to prevent NullReferenceException
+
+    [Tooltip("Configuration and shader updates for rain simulation.")]
+    public RainModule rain = new RainModule(); // Initialized to prevent NullReferenceException
 
     void Update()
     {
         Camera cam = Camera.main;
-        // if (cam != null)
-        // {
-        //     Matrix4x4 viewMatrix = cam.worldToCameraMatrix;
-        //     // Esegui l'update dei singoli moduli passando i dati necessari
-        //     wind.UpdateShader(viewMatrix);
-        //     rain.UpdateShader();
-        // }
         Matrix4x4 viewMatrix = cam != null ? cam.worldToCameraMatrix : Matrix4x4.identity;
 
-        // Esegui l'update dei singoli moduli passando i dati necessari
-        wind.UpdateShader(viewMatrix);
-        rain.UpdateShader();
+        // Update the individual modules, passing the necessary data
+        if (wind != null) wind.UpdateShader(viewMatrix);
+        if (rain != null) rain.UpdateShader();
     }
 
     void OnDisable()
     {
-        // Forza lo spegnimento di tutti gli effetti sulla GPU quando il manager si disattiva
+        // Force the shaders to reset when the script is disabled or when exiting Play Mode
         Shader.SetGlobalFloat("_WindActive", 0.0f);
         Shader.SetGlobalFloat("_RainActive", 0.0f);
     }
